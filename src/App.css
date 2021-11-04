@@ -1,0 +1,45 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-subheader {
+  color: #1976d2;
+}
+
+.messenger {
+  display: flex;
+  justify-content: space-around;
+}
+
+.chat {
+  list-style: none;
+  font-size: 16px;
+  color: #114b86;
+  padding: 20px;
+}
+
+.chat-message {
+  padding-bottom: 10px;
+}
+
+.message-box {
+  display: flex;
+  justify-content: center;
+}
+
+.message-send-btn {
+  margin: auto;
+}
+
+.sendingMessage:hover {
+  box-shadow: 21px 32px 35px -15px rgba(0, 0, 0, 0.6);
+}
