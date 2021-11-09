@@ -5,6 +5,6 @@ const createChatMock = (i) => ({
   name: `user ${i}`
 });
 
-export const CHATS = Array.from({ lrngth: 10}).map((_,i) =>
+export const CHATS = Array.from({ length: 10}).map((_,i) =>
   createChatMock(i)
 );
