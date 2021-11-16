@@ -3,19 +3,19 @@ import { Switch, Route } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { ChatList } from '../Components/ChatList';
 import { Messages } from '../Components/Messages';
-import { getChatsList } from '../Store/Chats/Selectors';
+import { getChatList } from '../Store/Chats/Selectors';
 import { addChat, deleteChat, setChat } from '../Store/Chats/Actions';
 import { nanoid } from 'nanoid';
 import { CHATS } from '../Components/ChatCreate';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteMessage } from '../Store/Messages/Actions';
+import { deleteMessages } from '../Store/Messages/Actions';
 
 
 export const Chats = () => {
-    const chats = useSelector(getChatsList);
+    const chats = useSelector(getChatList);
     const dispatch = useDispatch();
 
-    const onCreate = useCallback(() => {
+    const onCreate = useCallback( () => {
       dispatch(addChat( {
         id: nanoid(),
         name: 'chatName',
@@ -24,12 +24,12 @@ export const Chats = () => {
 
     const onDelete = (chatId) => {
       dispatch(deleteChat(chatId));
-      dispatch(deleteMessage(chatId));
+      dispatch(deleteMessages(chatId));
     };
 
     useEffect(() => {
       dispatch(setChat(CHATS))
-    });
+    }, []);
 
     return (
       <div className="App">

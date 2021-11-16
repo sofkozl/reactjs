@@ -9,7 +9,7 @@ export const addMessage = (message, chatId) => ({
   },
 });
 
-export const deleteMessage = (chatId) => ({
+export const deleteMessages = (chatId) => ({
   type: DELETE_MESSAGES,
   payload: chatId,
 });

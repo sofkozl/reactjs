@@ -1,37 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import { MessageList } from './MessageList';
 import { MessageForm } from './MessageForm';
-import { CHATS } from './ChatCreate';
+import { useDispatch, useSelector } from 'react-redux';
+import { getChatMessagesById } from '../Store/Messages/Selectors';
+import { checkChatById } from '../Store/Chats/Selectors';
+import { addMessage } from '../Store/Messages/Actions';
 
 
 export const Messages = () => {
   const { chatId } = useParams();
-  const [messages, setMessages] = useState([]);
+  const dispatch = useDispatch();
+  const messages = useSelector(getChatMessagesById(chatId));
+  const checkChat = useSelector(checkChatById(chatId));
   
-  const handleMessages = (author, text, id) => {
-    const newMessages = [...messages];
+  const handleMessages = (author, text) => {
     const newMessage = {
       author,
-      text,
-      id,
+      text
     };
-    newMessages.push(newMessage);
-    setMessages(newMessages);
+    dispatch(addMessage(newMessage, chatId));
   };
 
   const onSendMessage= (value) => {
-    handleMessages("user", value, `mess-${Date.now()}`);
+    handleMessages("user", value);
   };
 
   useEffect(() => {
-    if (messages[messages.length - 1]?.author === "user") {
-      setTimeout(() => setMessages((prevMessages) => [...prevMessages, {author: "bot", text: "An automatic answer from Bot", id: `mess-${Date.now()}`}]), 1500);
-      }
+    if (!messages || messages.length === 0) {
+      return;
+    }
+
+    const tail = messages[messages.length - 1];
+    if (tail.author === 'bot') {
+      return;
+    }
+
+    handleMessages('bot', 'An automatic reply');
+  
   }, [messages]);
 
-  if (!CHATS.find(({ id }) => id === chatId)) {
-    return <Redirect to="/chats" />;
+  if (!checkChat) {
+    return <Redirect to='/chats' />;
   }
 
   return (
