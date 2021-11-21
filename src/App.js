@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Home } from './Routes/Home';
 import { Profile } from './Routes/Profile';
 import { Chats } from './Routes/Chats';
-import { News } from './Routes/News';
+import { GistsList } from './Routes/Gist';
 import { persistor, store } from './Store/store';
 
 
@@ -22,14 +22,14 @@ function App() {
                   <Button to="/" component={Link} color="inherit">Home</Button>
                   <Button to="/profile" component={Link} color="inherit">Profile</Button>
                   <Button to="/chats" component={Link} color="inherit">Chats</Button>
-                  <Button to="/news" component={Link} color="inherit">News</Button>
+                  <Button to="/gists" component={Link} color="inherit">Gists List</Button>
                 </Toolbar>
               </AppBar>
             </Box>
             <Switch>
               <Route component={Chats} path="/chats" />
               <Route component={Profile} path="/profile" />
-              <Route component={News} path="/news" />
+              <Route component={GistsList} path="/gists" />
               <Route component={Home} path="/" />
             </Switch>
           </BrowserRouter>
