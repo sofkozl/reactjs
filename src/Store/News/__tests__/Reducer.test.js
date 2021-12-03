@@ -49,49 +49,4 @@ describe('news articles reducer test', () => {
     expect(received).toEqual(expected);
   });
 
-  describe('getNews', () => {
-
-        it('calls dispatch with getNewsLoading', async () => {
-          const mockDispatch = jest.fn();
-          
-          // eslint-disable-next-line no-undef
-          fetchMock.mockOnce(
-            JSON.stringify("The next call to fetch will always return this as the body")
-          );
-
-          await getNews()(mockDispatch);
-
-          expect(mockDispatch).toHaveBeenCalledWith(getNewsLoading());
-        });
-
-        it('getNews action after fetch API', async () => {
-          const mockDispatch = jest.fn();
-          
-          // eslint-disable-next-line no-undef
-          fetchMock.mockOnce(
-            JSON.stringify("The next call to fetch will always return this as the body")
-          );
-
-          await getNews()(mockDispatch);
-
-          // eslint-disable-next-line no-undef
-          expect(fetchMock).toHaveBeenCalledWith(NEWS_ARTICLES_API);
-        });
-        
-        it('calls dispatch with getNewsSuccess from API', async () => {
-          const mockDispatch = jest.fn();
-          const result = ['news'];
-          
-          // eslint-disable-next-line no-undef
-          fetchMock.mockOnce(
-            JSON.stringify(result)
-          );
-
-          await getNews()(mockDispatch);
-
-          expect(mockDispatch).toHaveBeenCalledTimes(2);
-          expect(mockDispatch).toHaveBeenLastCalledWith(getNewsSuccess(result));
-        });
-
-    })
 })
